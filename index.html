@@ -375,7 +375,7 @@
             
             <div class="pay-container">
                 <div class="pay-title">🔒 解锁内容</div>
-                <div class="pay-price"><small>¥</small> 9.9 <small>/次</small></div>
+                <div class="pay-price"><small>¥</small> <span id="priceValue">9.9</span> <small>/次</small></div>
                 
                 <!-- ⚠️【这里替换你的收款码】 START -->
                 <div class="qr-code-box">
@@ -462,9 +462,21 @@
         function startProcess(type, gender) {
             currentType = type;
             currentGender = gender;
-            console.log(`用户选择了: ${type} - ${gender}`); // 这里可以后续用于统计
+            console.log(`用户选择了: ${type} - ${gender}`);
+
+            // --- 新增的价格逻辑 START ---
+            const priceElement = document.getElementById('priceValue');
+            if (type === 'make') {
+                // 制作/录入：2元
+                priceElement.textContent = '2';
+            } else if (type === 'draw') {
+                // 抽取：5元
+                priceElement.textContent = '5';
+            }
+            // --- 新增的价格逻辑 END ---
+        
             goToPage('page-pay');
-        }
+         }
 
         // 跳转问卷（模拟支付成功）
         function goToSurvey() {
